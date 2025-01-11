@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
-import numpy as np
 import pandas as pd
 import my_date
-from discord.ext import commands
 
 data = "menu_data_with_items.xlsx"
 
@@ -12,6 +10,7 @@ class MyPandas(my_date.MyDate):
         self.my_date = my_date.MyDate()
 
     def get_menu_for_today(self):
+        self.my_date.update()
         today_date = self.my_date.now_date
         date = self.data["日付"].tolist()
         menu = None  # menu変数を初期化
