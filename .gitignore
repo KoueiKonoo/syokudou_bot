@@ -1,0 +1,4 @@
+.env
+*.xlsx
+dummy_menu.py
+__pycache__
