@@ -24,6 +24,9 @@ class MySlash(commands.Cog):
         menu_message = "\n".join(menu)
         await interaction.response.send_message(f"Today's menu is:\n{menu_message}")
 
+    @discord.app_commands.command(name="author", description="作者についての情報を表示します。")
+    async def author(self, interaction: discord.Interaction):
+        await interaction.response.send_message("This bot is created by Kouei Konoo.\nGithub:KoueiKonoo\ntwitter: @rhythmgame_nene\n")
 
 def setup(bot):
     bot.add_cog(MySlash(bot))
