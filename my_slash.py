@@ -1,9 +1,13 @@
 import discord
 from discord.ext import commands
+from my_pd import MyPandas
+from my_date import MyDate
 
 class MySlash(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+        self.my_pandas = MyPandas("menu_data_with_items.xlsx")
+        self.my_date = MyDate()
 
     @commands.Cog.listener()
     async def on_ready(self):
@@ -14,9 +18,12 @@ class MySlash(commands.Cog):
         except Exception as e:
             print(e)
 
-    @discord.app_commands.command(name="today's_menu", description="今日の食堂のメニューを表示します。")
+    @discord.app_commands.command(name="今日のメニュー", description="今日の食堂のメニューを表示します。")
     async def todays_menu(self, interaction: discord.Interaction):
-        await interaction.response.send_message(f"Today's menu is curry")
+        menu = self.my_pandas.get_menu_for_today()
+        menu_message = "\n".join(menu)
+        await interaction.response.send_message(f"Today's menu is:\n{menu_message}")
+
 
 def setup(bot):
     bot.add_cog(MySlash(bot))
