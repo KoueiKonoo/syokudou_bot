@@ -7,6 +7,7 @@ if __name__ == "__main__":
     from dotenv import load_dotenv
     from my_cog import MyCog
     from my_slash import MySlash
+    from my_date import MyDate
     import asyncio
 
     load_dotenv()
@@ -21,6 +22,8 @@ if __name__ == "__main__":
         print(f'Logged in as {bot.user}')
 
     async def main():
+        my_date = MyDate()
+        my_date.start_monitoring(interval=10)
         await bot.add_cog(MyCog(bot))
         await bot.add_cog(MySlash(bot))
 
