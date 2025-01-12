@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from datetime import datetime
+from datetime import datetime, timedelta
 import time
 import threading
 
@@ -8,28 +8,12 @@ class MyDate:
         self.update()
 
     def update(self):
-        now = datetime.now()
-        year = now.year
-        month = now.month
-        day = now.day
-        hour = now.hour
-        minute = now.minute
-        second = now.second
-
-        date_list = []
-        time_list = []
-
-        for _ in [year, month, day]:
-            if _ == month or _ == day:
-                date_list.append(str(_).zfill(2))
-            else:
-                date_list.append(str(_))
-
-        for _ in [hour, minute, second]:
-            time_list.append(str(_).zfill(2))
-
-        self.now_date = "/".join(date_list)
-        self.now_time = ":".join(time_list)
+        self.now_date= datetime.now().strftime("%Y/%m/%d")
+        self.now_time = datetime.now().strftime("%H:%M:%S")
+    
+    def get_next_days(self,day):
+        next_date = datetime.now() + timedelta(days=day)
+        return next_date.strftime("%Y/%m/%d")
 
     def monitor_date_change(self, interval=60):
         while True:
