@@ -32,8 +32,9 @@ THIS SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPL
 
 Please refer to the LICENSE files of the respective libraries for detailed license terms.
 
+## このBOTは、以下のライブラリをインストールすることで利用できます。
 ```bash
-pip install discord.py pandas
+pip install discord.py pandas python-dotenv threading
 ```
 
 ## このBOTは、以下のAPIと連携しています。
@@ -44,6 +45,24 @@ This project interacts with the following APIs:
 
 Please ensure that you comply with the [Discord API Terms of Service](https://discord.com/developers/docs/legal) when using this bot.
 
+## このソフトウェアを利用する際は、以下の手順に従ってください。
+1. このリポジトリをクローンします。
+```bash
+git clone https://github.com/KoueiKonoo/syokudou_bot.git
+```
+2. このリポジトリに移動します。
+```bash
+cd syokudou_bot
+```
+3. .envファイルを作成し、以下の内容を記述します。
+```bash
+SYOKUDOU_BOT_TOKEN=YOUR_BOT_TOKEN
+```
+4. このBOTを起動します。
+```bash
+chmod +x main.py
+./main.py
+```
 
 ## このBOTは、以下のリポジトリで公開されています。
 github.com/KoueiKonoo/syokudou-bot
