@@ -26,6 +26,20 @@ class MyPandas(my_date.MyDate):
             return ["本日のメニューはありません"]
         else:
             return menu[1:].tolist()
+        
+    def get_menu_for_next_days(self,day):
+        next = self.my_date.get_next_days(day)
+        date = self.loaded_data["日付"].tolist()
+        menu = None
+        for i in range(len(date)):
+            if date[i] == next:
+                menu = self.loaded_data.iloc[i]
+                break
+        if menu is None or menu[1:].empty:
+            return [f"{next}のメニューはありません"]
+        else:
+            return menu[1:].tolist()
+
 
     def reload_data(self):
         self.loaded_data = pd.read_excel(self.data, engine='openpyxl')
