@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 import pandas as pd
 import my_date
 import threading
@@ -9,12 +8,13 @@ data = "menu_data_with_items.xlsx"
 class MyPandas(my_date.MyDate):
     def __init__(self, data):
         self.data = data
-        self.loaded_data = pd.read_excel(data, engine='openpyxl')
+        self.loaded_data = pd.read_excel(self.data, engine='openpyxl')
         self.my_date = my_date.MyDate()
-        self.start_data_reload(interval=86400)
+        self.data_reload_thread = None
+        self.start_data_reload(interval=120)  # 2分（120秒）ごとにデータを再読み込み
 
     def get_menu_for_today(self):
-        self.my_date.update()
+        self.my_date.update()  # 最新の日付を取得
         today_date = self.my_date.now_date
         date = self.loaded_data["日付"].tolist()
         menu = None  # menu変数を初期化
@@ -26,33 +26,39 @@ class MyPandas(my_date.MyDate):
             return ["本日のメニューはありません"]
         else:
             return menu[1:].tolist()
-        
+    
     def get_menu_for_next_days(self,day):
-        next = self.my_date.get_next_days(day)
+        self.my_date.update()
+        next_date = self.my_date.get_next_days(day)
         date = self.loaded_data["日付"].tolist()
         menu = None
         for i in range(len(date)):
-            if date[i] == next:
+            if date[i] == next_date:
                 menu = self.loaded_data.iloc[i]
                 break
         if menu is None or menu[1:].empty:
-            return [f"{next}のメニューはありません"]
+            return [f"{next_date}のメニューはありません"]
         else:
             return menu[1:].tolist()
 
 
     def reload_data(self):
-        self.loaded_data = pd.read_excel(self.data, engine='openpyxl')
-        print("Data reloaded")
+        try:
+            self.loaded_data = pd.read_excel(self.data, engine='openpyxl')
+            self.my_date.update()
+        except Exception as e:
+            print(f"Failed to reload data: {e}")
 
-    def start_data_reload(self, interval=86400):
-        def reload_loop():
-            while True:
-                self.reload_data()
-                time.sleep(interval)
-        thread = threading.Thread(target=reload_loop)
-        thread.daemon = True
-        thread.start()
+    def start_data_reload(self, interval=120):
+        if self.data_reload_thread is None:
+            def reload_loop():
+                while True:
+                    self.reload_data()
+                    print(f"Data reloaded at {self.my_date.now_time}")
+                    time.sleep(interval)
+            self.data_reload_thread = threading.Thread(target=reload_loop)
+            self.data_reload_thread.daemon = True
+            self.data_reload_thread.start()
 
 if __name__ == "__main__":
     my_pandas = MyPandas(data)
