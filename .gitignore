@@ -2,3 +2,5 @@
 *.xlsx
 dummy_menu.py
 __pycache__
+nohup.out
+.gitignore
