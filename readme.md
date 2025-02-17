@@ -18,17 +18,8 @@ This project uses the following external libraries:
 
 - [discord.py](https://discordpy.readthedocs.io/) - A Python wrapper for the Discord API.
 - [pandas](https://pandas.pydata.org/) - Data analysis and manipulation library.
+- [openpyxl](https://openpyxl.readthedocs.io/) (MIT License)
 - [python-dotenv](https://github.com/theskumar/python-dotenv), licensed under the [BSD 3-Clause License](https://opensource.org/licenses/BSD-3-Clause).
-
-Copyright (c) 2025 Saurabh Kumar
-
-Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
-
-1. Redistributions of source code must retain the above copyright notice, this list of conditions, and the following disclaimer.
-2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions, and the following disclaimer in the documentation and/or other materials provided with the distribution.
-3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
-
-THIS SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 Please refer to the LICENSE files of the respective libraries for detailed license terms.
 
