@@ -15,7 +15,7 @@ class MyPandas(MyDate):
 
     def get_menu_for_today(self):
         self.my_date.update()  # 最新の日付を取得
-        today_date = self.my_date.now_date
+        today_date = self.my_date.now_date.strftime("%Y/%m/%d")
         date = self.loaded_data["日付"].tolist()
         menu = None  # menu変数を初期化
         for i in range(len(date)):
