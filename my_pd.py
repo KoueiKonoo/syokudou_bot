@@ -1,15 +1,15 @@
 import pandas as pd
-import my_date
+from my_date import MyDate
 import threading
 import time
 
 data = "menu_data_with_items.xlsx"
 
-class MyPandas(my_date.MyDate):
+class MyPandas(MyDate):
     def __init__(self, data):
         self.data = data
         self.loaded_data = pd.read_excel(self.data, engine='openpyxl')
-        self.my_date = my_date.MyDate()
+        self.my_date = MyDate()
         self.data_reload_thread = None
         self.start_data_reload(interval=120)  # 2分（120秒）ごとにデータを再読み込み
 
@@ -23,7 +23,7 @@ class MyPandas(my_date.MyDate):
                 menu = self.loaded_data.iloc[i]
                 break  # 一致する日付が見つかったらループを抜ける
         if menu is None or menu[1:].empty:
-            return ["本日のメニューはありません"]
+            return
         else:
             return menu[1:].tolist()
     
@@ -37,10 +37,9 @@ class MyPandas(my_date.MyDate):
                 menu = self.loaded_data.iloc[i]
                 break
         if menu is None or menu[1:].empty:
-            return [f"{next_date}のメニューはありません"]
+            return
         else:
             return menu[1:].tolist()
-
 
     def reload_data(self):
         try:
