@@ -8,16 +8,16 @@ class MyDate:
         self.update()
 
     def update(self):
-        self.now_date= datetime.now().strftime("%Y/%m/%d")
-        self.now_time = datetime.now().strftime("%H:%M:%S")
+        self.now_date= datetime.now()
+        self.now_time = datetime.now()
     
     def get_next_days(self, day):
-        next_date = datetime.now() + timedelta(days=day)
+        next_date = self.now_date + timedelta(days=day)
         return next_date.strftime("%Y/%m/%d")
 
     def monitor_date_change(self, interval=60):
         while True:
-            new_date = datetime.now().strftime("%Y/%m/%d")
+            new_date = self.now_date.strftime("%Y/%m/%d")
             if new_date != self.now_date:
                 print(f"Date changed from {self.now_date} to {new_date}")
                 self.update()  # 日付が変わった時に更新する
