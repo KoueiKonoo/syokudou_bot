@@ -6,9 +6,6 @@ if __name__ == "__main__":
         from discord.ext import commands
         import os
         from dotenv import load_dotenv
-        from my_cog import MyCog
-        from my_slash import MySlash
-        from my_date import MyDate
         import asyncio
 
         load_dotenv()
@@ -16,28 +13,23 @@ if __name__ == "__main__":
         intents = discord.Intents.default()
         intents.members = True
         intents.message_content = True  # メッセージコンテンツのインテントを有効にする
-        bot = commands.Bot(command_prefix="!", intents=intents, activity=discord.Game("食事"), help_command=None)
+        bot = commands.Bot(command_prefix="!", intents=intents, activity=discord.Game("学食"), help_command=None)
+
+        async def load_extensions():
+            for filename in os.listdir("./cogs"):
+                if filename.endswith(".py"):
+                    await bot.load_extension(f"cogs.{filename[:-3]}")
 
         @bot.event
         async def on_ready():
             print(f'Logged in as {bot.user}')
 
         async def main():
-            my_date = MyDate()
-            my_date.start_monitoring(interval=10)  # 日付の変更を監視するスレッドを開始
-            my_slash = MySlash(bot)
-            await bot.add_cog(my_slash)
-            await bot.add_cog(MyCog(bot))
-
-            token = os.getenv("SYOKUDOU_MENU_BOT_TOKEN")
-
-            if token is None:
-                raise ValueError("SYOKUDOU_MENU_BOT_TOKEN environment variable is not set")
-
-            await bot.start(token)
+            async with bot:
+                await load_extensions()
+                await bot.start(os.getenv("SYOKUDOU_MENU_BOT_TOKEN"))
 
         asyncio.run(main())
     except KeyboardInterrupt:
-        asyncio.sleep(1)
         print("end.")
         exit(1)
