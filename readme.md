@@ -26,7 +26,7 @@ Please refer to the LICENSE files of the respective libraries for detailed licen
 
 ## このBOTは、以下のライブラリをインストールすることで利用できます。
 ```bash
-pip install discord.py pandas python-dotenv threading
+pip install discord.py pandas python-dotenv threading openpyxl
 ```
 
 ## このBOTは、以下のAPIと連携しています。
