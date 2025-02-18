@@ -19,7 +19,7 @@ class MyDate:
         while True:
             new_date = self.now_date.strftime("%Y/%m/%d")
             if new_date != self.now_date:
-                print(f"Date changed from {self.now_date} to {new_date}")
+                print(f"Date changed from {(self.now_date).strftime("%Y/%m/%d")} to {new_date}")
                 self.update()  # 日付が変わった時に更新する
             time.sleep(interval)
 

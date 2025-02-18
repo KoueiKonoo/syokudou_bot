@@ -5,7 +5,7 @@ from my_date import MyDate
 class MyCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.my_pandas = MyPandas("menu_data_with_items.xlsx")
+        self.my_pandas = MyPandas()
         self.my_date = MyDate()
         self.auto_delivery.start()
 
