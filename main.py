@@ -31,5 +31,8 @@ if __name__ == "__main__":
 
         asyncio.run(main())
     except KeyboardInterrupt:
+        async def close():
+            await bot.close()
         print("end.")
-        exit(1)
+        asyncio.run(close())
+        exit(0)
